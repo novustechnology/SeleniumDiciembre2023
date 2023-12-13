@@ -4,9 +4,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import page.DatosPagoPage;
 import page.DatosTarjetaPage;
 import page.HomePage;
+import page.ValidarPagoPage;
 
 public class CarritoStep {
 
@@ -16,10 +18,13 @@ public class CarritoStep {
 
     DatosPagoPage datosPagoPage;
 
+    ValidarPagoPage validarPagoPage;
+
     public CarritoStep() {
         homePage= new HomePage(Hooks.driver);
         datosTarjetaPage= new DatosTarjetaPage(Hooks.driver);
         datosPagoPage= new DatosPagoPage(Hooks.driver);
+        validarPagoPage= new ValidarPagoPage(Hooks.driver);
     }
 
     @Given("la pagina DemoGuru esta disponible")
@@ -59,6 +64,9 @@ public class CarritoStep {
     }
 
     @Then("validamos que el pago fue exitoso {string}")
-    public void validamosQueElPagoFueExitoso(String arg0) {
+    public void validamosQueElPagoFueExitoso(String txtPagoExitoso) {
+        Assert.assertEquals(txtPagoExitoso,validarPagoPage.validarMensajePago());
+        Assert.assertTrue(validarPagoPage.validarPresenciaBoton());
+
     }
 }

@@ -25,6 +25,9 @@ public class DatosPagoPage extends BasePage {
     @FindBy(name = "cvv_code")
     private WebElement txtCvv;
 
+    @FindBy(name = "submit")
+    private WebElement btnComprar;
+
 
     public void ingresarDatos(){
 
@@ -32,7 +35,7 @@ public class DatosPagoPage extends BasePage {
         new Select(cbMes).selectByVisibleText(DatosTarjetaPage.mes);
         new Select(cbAnio).selectByVisibleText(DatosTarjetaPage.anio);
         txtCvv.sendKeys(DatosTarjetaPage.cvv);
-
+        btnComprar.click();
     }
 
 }

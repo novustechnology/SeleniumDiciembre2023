@@ -7,7 +7,8 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         tags = "@Carrito2",
         glue = "step",
-        plugin = {"json:target/cucumber-report/cucumber.json","html:target/cucumber-report/cucumber-report.html"},
+        plugin =  {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        //plugin = {"json:target/cucumber-report/cucumber.json","html:target/cucumber-report/cucumber-report.html"},
         monochrome = true
 )
 
