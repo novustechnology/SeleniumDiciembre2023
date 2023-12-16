@@ -7,7 +7,6 @@ import java.util.Properties;
 
 public class ConfigFileReader {
 
-
     private final Properties properties;
 
 

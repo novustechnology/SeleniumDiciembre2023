@@ -25,4 +25,4 @@ Feature: Compra de un articulo con Tarjeta de Credito
     Examples:
       | cantidad |
       | 3        |
-      #| 5        |
+      | 5        |

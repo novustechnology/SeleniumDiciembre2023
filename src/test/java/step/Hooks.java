@@ -39,7 +39,6 @@ public class Hooks {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
-
     @AfterStep
     public void screenshot(Scenario scenario) {
         //if (scenario.isFailed()) {
