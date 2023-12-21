@@ -53,4 +53,8 @@ public class FormularioStep {
         Assert.assertEquals(formularioPage.validarMensajeError(),txtError);
     }
 
+    @Then("ingresamos la data")
+    public void ingresamosLaData() {
+    formularioPage.ingresarDatosCsv();
+    }
 }

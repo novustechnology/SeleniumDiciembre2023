@@ -3,6 +3,9 @@ package page;
 import base.BasePage;
 import base.ConfigFileReader;
 import io.cucumber.datatable.DataTable;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +16,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -23,6 +29,7 @@ public class FormularioPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    String CSV_FILE_PATH = "src/test/resources/data/test.csv";
     ConfigFileReader configFileReader = new ConfigFileReader();
 
     @FindBy(xpath = "//img[@class='loader-gif']")
@@ -112,8 +119,22 @@ public class FormularioPage extends BasePage {
         String mensajeError = txtApellido.getAttribute("validationMessage");
         System.out.println("Error: " + mensajeError);
         return mensajeError;
-
-
     }
 
+    public void ingresarDatosCsv() {
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(loader));
+            Reader reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
+            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader());
+
+            for (CSVRecord csvRecord : csvParser) {
+                txtNombre.sendKeys(csvRecord.get("Nombre"));
+                txtApellido.sendKeys(csvRecord.get("Apellido"));
+                driver.findElement(By.xpath("//label[text()='" + csvRecord.get("Pasatiempos") + "']")).click();
+                driver.findElement(By.xpath("//label[text()='" + csvRecord.get("Género") + "']")).click();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

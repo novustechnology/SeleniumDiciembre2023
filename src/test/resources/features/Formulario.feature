@@ -32,7 +32,7 @@ Feature: Automatización de Formulario
     Then valido que al aceptar se abra una nueva ventana y al cancelar no haga nada
 
 
-
-
-
-
+  @Csv
+  Scenario: Ingreso de datos mediante Csv
+    Given ingreso a la pagina de NovusTechnology
+    Then ingresamos la data
